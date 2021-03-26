@@ -68,11 +68,76 @@ $(function(){
                 totalInPennies = parseInt(input);
             }
 
-            alert('Proceed to convert to coins')
+            calculator.convertToCoins(totalInPennies);
 
         },
 
-       
+        convertToCoins : function (pennies){
+
+            let denoms = [200, 100, 50, 20, 10, 5, 2, 1]; 
+            let remaining = pennies;
+            
+            let coinsNeeded = {
+                200 : {
+                    'name' : '£2',
+                    'qty' : 0
+                },
+                100 : {
+                    'name' : '£1',
+                    'qty' : 0
+                },
+                50 : {
+                    'name' : '50p',
+                    'qty' : 0
+                },
+                20 : {
+                    'name' : '20p',
+                    'qty' : 0
+                },
+                10 : {
+                    'name' : '10p',
+                    'qty' : 0
+                },
+                5 : {
+                    'name' : '5p',
+                    'qty' : 0
+                }, 
+                2 : {
+                    'name' : '2p',
+                    'qty' : 0
+                },
+                1 : {
+                    'name' : '1p',
+                    'qty' : 0
+                },
+            }
+
+            for(var i = 0; i < denoms.length; i++){
+                let denom = denoms[i];
+                coinsNeeded[denom].qty = Math.floor(remaining / denom);
+                remaining = remaining % denom;
+            }
+        
+            calculator.renderResult(coinsNeeded)
+        },
+
+        renderResult : function (coinsNeeded){
+            
+            $("#result-section").removeClass('d-none');
+            $("#coins-holder").empty();
+            
+            $.each(coinsNeeded, function(i, item){
+                if(item.qty > 0){
+                    $('#coins-holder').append(`
+                        <div class="m-2 text-center">
+                            <div class="coin shadow bg-white border">${item.name}</div> 
+                            <span class="font-weight-bold">x ${item.qty}</span>
+                        </div>
+                    `)
+                }
+            })
+        
+        }
     }
 
     calculator.init()
