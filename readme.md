@@ -49,4 +49,4 @@ The array: `denoms[]` ensures the order of iteration from largest denomination t
 
 ___
 
-[wwong-cv.com/amount-to-coins](http://wwong-cv.com/amount-to-coins)
+[wwong-cv.com/apps/amount-to-coins](http://wwong-cv.com/apps/amount-to-coins)
